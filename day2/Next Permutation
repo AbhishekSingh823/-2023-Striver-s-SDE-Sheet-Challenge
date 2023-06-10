@@ -1,0 +1,43 @@
+#include <bits/stdc++.h> 
+vector<int> nextPermutation(vector<int> &permutation, int n)
+{
+    //  Write your code here.
+    int nn = permutation.size();
+
+    vector<int>v=permutation;
+    // cout <<"prev ";
+    // for(int i =0 ; i< n;i++)cout<<v[i]<<"  ";
+    // cout<<endl;
+    bool b =0;
+    for(int i =nn-1;i>0 ;i--)
+    {
+        if(v[i]>v[i-1]||(i==1&&v[i]>v[i-1]))
+        {   int c =v[i-1];
+            int bb =v[i],ind =i ;
+            for(int j = i ; j<nn;j++)
+             { 
+                 if(bb>=v[j]&&v[j]>c)
+                 {
+                     bb=v[j];
+                     ind=j;
+                     b=1;
+                 } 
+                 
+                  
+            }
+
+            if(b) {
+              // cout<<" ind: "<<ind<<" bb : "<< bb <<endl;
+              v[ind]= v[i-1];
+              v[i-1]=bb;
+              sort(v.begin()+i,v.end());
+              break;
+            }
+
+        }
+         if(b)break;
+    }
+     
+   if(!b)sort(v.begin(),v.end());
+    return  v;
+    }
